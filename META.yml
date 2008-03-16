@@ -3,7 +3,7 @@ abstract: build a bogus CPAN instance for testing
 author: 
   - Ricardo Signes <rjbs@cpan.org>
 distribution_type: module
-generated_by: Module::Install version 0.68
+generated_by: Module::Install version 0.69
 license: perl
 meta-spec: 
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
@@ -15,14 +15,16 @@ no_index:
     - t
 requires: 
   CPAN::Checksums: 0.000
+  Class::MOP: 0.53
   Compress::Zlib: 0.000
   Cwd: 0.000
   File::Next: 0.000
   File::Path: 0.000
   File::Spec: 0.000
   Module::Faker::Dist: 0.003
+  Moose: 0.000
   Sort::Versions: 0.000
   Text::Template: 0.000
   perl: 5.8.0
 tests: t/*.t xt/*.t
-version: 0.001
+version: 0.002
