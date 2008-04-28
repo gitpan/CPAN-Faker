@@ -1,19 +1,19 @@
---- 
-abstract: build a bogus CPAN instance for testing
-author: 
-  - Ricardo Signes <rjbs@cpan.org>
+---
+abstract: 'build a bogus CPAN instance for testing'
+author:
+  - 'This is free software, released under the same terms as perl'
 distribution_type: module
-generated_by: Module::Install version 0.69
+generated_by: 'Module::Install version 0.71'
 license: perl
-meta-spec: 
+meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
   version: 1.3
 name: CPAN-Faker
-no_index: 
-  directory: 
+no_index:
+  directory:
     - inc
     - t
-requires: 
+requires:
   CPAN::Checksums: 0.000
   Class::MOP: 0.53
   Compress::Zlib: 0.000
@@ -26,5 +26,4 @@ requires:
   Sort::Versions: 0.000
   Text::Template: 0.000
   perl: 5.8.0
-tests: t/*.t xt/*.t
-version: 0.002
+version: 0.003

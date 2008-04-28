@@ -7,9 +7,9 @@ eg/SimplePrereq.yaml
 eg/Versioned-1.yaml
 eg/Versioned-2.yaml
 inc/Module/Install.pm
-inc/Module/Install/AuthorTests.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
+inc/Module/Install/ExtraTests.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
@@ -22,5 +22,5 @@ MANIFEST			This list of files
 META.yml
 README
 t/basic.t
-xt/pod-coverage.t
-xt/pod.t
+xt/release/pod-coverage.t
+xt/release/pod.t
