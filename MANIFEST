@@ -22,5 +22,6 @@ MANIFEST			This list of files
 META.yml
 README
 t/basic.t
+t/methods.t
 xt/release/pod-coverage.t
 xt/release/pod.t

@@ -26,4 +26,4 @@ requires:
   Sort::Versions: 0.000
   Text::Template: 0.000
   perl: 5.8.0
-version: 0.003
+version: 0.004
