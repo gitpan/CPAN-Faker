@@ -1,18 +1,64 @@
-use inc::Module::Install;
-all_from      ('lib/CPAN/Faker.pm');
 
-requires('CPAN::Checksums'     => '0.000'); # minimum unknown
-requires('Class::MOP'          => '0.53' ); # for Moose; init_arg => undef
-requires('Compress::Zlib'      => '0.000'); # minimum unknown
-requires('Cwd'                 => '0.000'); # minimum unknown
-requires('File::Next'          => '0.000'); # minimum unknown
-requires('File::Path'          => '0.000'); # minimum unknown
-requires('File::Spec'          => '0.000'); # minimum unknown
-requires('Module::Faker::Dist' => '0.003'); # author prefix dirs
-requires('Moose',              => '0.000'); # minimum unknown
-requires('Sort::Versions'      => '0.000'); # minimum unknown
-requires('Text::Template'      => '0.000'); # minimum unknown
+use strict;
+use warnings;
 
-extra_tests;
+BEGIN { require 5.008; }
 
-WriteAll();
+use ExtUtils::MakeMaker 6.31;
+
+
+
+my %WriteMakefileArgs = (
+  'ABSTRACT' => 'build a bogus CPAN instance for testing',
+  'AUTHOR' => 'Ricardo Signes <rjbs@cpan.org>',
+  'BUILD_REQUIRES' => {
+    'File::Temp' => '0',
+    'Test::More' => '0.96'
+  },
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'CPAN-Faker',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'CPAN::Faker',
+  'PREREQ_PM' => {
+    'CPAN::Checksums' => '0',
+    'Compress::Zlib' => '0',
+    'Cwd' => '0',
+    'Data::Section' => '0',
+    'File::Next' => '0',
+    'File::Path' => '0',
+    'File::Spec' => '0',
+    'Module::Faker::Dist' => '0.003',
+    'Moose' => '0',
+    'Sort::Versions' => '0',
+    'Text::Template' => '0'
+  },
+  'VERSION' => '0.005',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
