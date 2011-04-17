@@ -5,6 +5,7 @@ META.json
 META.yml
 Makefile.PL
 README
+bin/cpanfaker
 dist.ini
 eg/MetaVersion.yaml
 eg/Multi-1.yaml

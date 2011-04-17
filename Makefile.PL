@@ -19,7 +19,9 @@ my %WriteMakefileArgs = (
     'ExtUtils::MakeMaker' => '6.31'
   },
   'DISTNAME' => 'CPAN-Faker',
-  'EXE_FILES' => [],
+  'EXE_FILES' => [
+    'bin/cpanfaker'
+  ],
   'LICENSE' => 'perl',
   'NAME' => 'CPAN::Faker',
   'PREREQ_PM' => {
@@ -27,15 +29,17 @@ my %WriteMakefileArgs = (
     'Compress::Zlib' => '0',
     'Cwd' => '0',
     'Data::Section' => '0',
+    'File::Find' => '0',
     'File::Next' => '0',
     'File::Path' => '0',
     'File::Spec' => '0',
+    'Getopt::Long::Descriptive' => '0',
     'Module::Faker::Dist' => '0.003',
     'Moose' => '0',
     'Sort::Versions' => '0',
     'Text::Template' => '0'
   },
-  'VERSION' => '0.005',
+  'VERSION' => '0.006',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -25,9 +25,11 @@
             "Compress::Zlib" : 0,
             "Cwd" : 0,
             "Data::Section" : 0,
+            "File::Find" : 0,
             "File::Next" : 0,
             "File::Path" : 0,
             "File::Spec" : 0,
+            "Getopt::Long::Descriptive" : 0,
             "Module::Faker::Dist" : "0.003",
             "Moose" : 0,
             "Sort::Versions" : 0,
@@ -49,7 +51,7 @@
          "url" : "git://git.codesimply.com/CPAN-Faker.git"
       }
    },
-   "version" : "0.005",
+   "version" : "0.006",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
