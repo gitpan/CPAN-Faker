@@ -34,12 +34,12 @@ my %WriteMakefileArgs = (
     'File::Path' => '0',
     'File::Spec' => '0',
     'Getopt::Long::Descriptive' => '0',
-    'Module::Faker::Dist' => '0.003',
+    'Module::Faker::Dist' => '0.008',
     'Moose' => '0',
     'Sort::Versions' => '0',
     'Text::Template' => '0'
   },
-  'VERSION' => '0.006',
+  'VERSION' => '0.007',
   'test' => {
     'TESTS' => 't/*.t'
   }

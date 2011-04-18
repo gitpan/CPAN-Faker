@@ -1,6 +1,6 @@
 package CPAN::Faker;
 BEGIN {
-  $CPAN::Faker::VERSION = '0.006';
+  $CPAN::Faker::VERSION = '0.007';
 }
 use 5.008;
 use Moose;
@@ -14,7 +14,7 @@ use File::Find ();
 use File::Next ();
 use File::Path ();
 use File::Spec ();
-use Module::Faker::Dist 0.003;
+use Module::Faker::Dist 0.008; # from .dist files
 use Sort::Versions qw(versioncmp);
 use Text::Template;
 
@@ -80,7 +80,11 @@ sub make_cpan {
       my @files = grep { $_ ne '.' and $_ ne '..' } readdir $dir;
       Carp::croak "destination directory is not empty" if @files;
     } else {
-      Carp::croak "couldn't create destination: $!" unless mkdir;
+      my $error;
+      # actually *using* $error is annoying; will sort it out later..?
+      # -- rjbs, 2011-04-18
+      Carp::croak "couldn't create destination"
+        unless File::Path::make_path($self->dest, { error => \$error });
     }
   }
 
@@ -344,7 +348,7 @@ CPAN::Faker - build a bogus CPAN instance for testing
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 

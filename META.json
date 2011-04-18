@@ -30,7 +30,7 @@
             "File::Path" : 0,
             "File::Spec" : 0,
             "Getopt::Long::Descriptive" : 0,
-            "Module::Faker::Dist" : "0.003",
+            "Module::Faker::Dist" : "0.008",
             "Moose" : 0,
             "Sort::Versions" : 0,
             "Text::Template" : 0,
@@ -51,7 +51,7 @@
          "url" : "git://git.codesimply.com/CPAN-Faker.git"
       }
    },
-   "version" : "0.006",
+   "version" : "0.007",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
