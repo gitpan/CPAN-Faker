@@ -2,46 +2,49 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.008; }
+use 5.008;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'build a bogus CPAN instance for testing',
-  'AUTHOR' => 'Ricardo Signes <rjbs@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'File::Temp' => '0',
-    'Test::More' => '0.96'
+  "ABSTRACT" => "build a bogus CPAN instance for testing",
+  "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "File::Temp" => 0,
+    "Test::More" => "0.96"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'CPAN-Faker',
-  'EXE_FILES' => [
-    'bin/cpanfaker'
+  "DISTNAME" => "CPAN-Faker",
+  "EXE_FILES" => [
+    "bin/cpanfaker"
   ],
-  'LICENSE' => 'perl',
-  'NAME' => 'CPAN::Faker',
-  'PREREQ_PM' => {
-    'CPAN::Checksums' => '0',
-    'Compress::Zlib' => '0',
-    'Cwd' => '0',
-    'Data::Section' => '0',
-    'File::Find' => '0',
-    'File::Next' => '0',
-    'File::Path' => '0',
-    'File::Spec' => '0',
-    'Getopt::Long::Descriptive' => '0',
-    'Module::Faker::Dist' => '0.008',
-    'Moose' => '0',
-    'Sort::Versions' => '0',
-    'Text::Template' => '0'
+  "LICENSE" => "perl",
+  "NAME" => "CPAN::Faker",
+  "PREREQ_PM" => {
+    "CPAN::Checksums" => 0,
+    "Compress::Zlib" => 0,
+    "Cwd" => 0,
+    "Data::Section" => 0,
+    "File::Find" => 0,
+    "File::Next" => 0,
+    "File::Path" => 0,
+    "File::Spec" => 0,
+    "Getopt::Long::Descriptive" => 0,
+    "IO::Compress::Gzip" => 0,
+    "Module::Faker::Dist" => "0.008",
+    "Moose" => 0,
+    "Sort::Versions" => 0,
+    "Text::Template" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.007',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.008",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

@@ -1,6 +1,6 @@
 package CPAN::Faker;
-BEGIN {
-  $CPAN::Faker::VERSION = '0.007';
+{
+  $CPAN::Faker::VERSION = '0.008';
 }
 use 5.008;
 use Moose;
@@ -14,6 +14,7 @@ use File::Find ();
 use File::Next ();
 use File::Path ();
 use File::Spec ();
+use IO::Compress::Gzip qw(gzip $GzipError);
 use Module::Faker::Dist 0.008; # from .dist files
 use Sort::Versions qw(versioncmp);
 use Text::Template;
@@ -101,6 +102,7 @@ sub make_cpan {
   $self->write_author_index;
   $self->write_modlist_index;
   $self->write_perms_index;
+  $self->write_perms_gz_index;
 }
 
 
@@ -280,15 +282,20 @@ sub write_modlist_index {
   $gz->gzclose and die "error closing $index_filename";
 }
 
-sub write_perms_index {
+sub _perms_index_filename {
   my ($self) = @_;
-
   my $index_dir = File::Spec->catdir($self->dest, 'modules');
 
-  my $index_filename = File::Spec->catfile(
+  return File::Spec->catfile(
     $index_dir,
     '06perms.txt',
   );
+}
+
+sub write_perms_index {
+  my ($self) = @_;
+
+  my $index_filename = $self->_perms_index_filename;
 
   my $template = $self->section_data('packages');
 
@@ -318,6 +325,15 @@ sub write_perms_index {
   close $fh or die "error closing $index_filename after writing: $!";
 }
 
+sub write_perms_gz_index {
+  my ($self) = @_;
+
+  my $index_filename = $self->_perms_index_filename;
+  my $index_gz_fname = "$index_filename.gz";
+  gzip($index_filename, $index_gz_fname)
+    or confess "gzip failed: $GzipError"
+}
+
 sub _02pkg_front_matter {
   my ($self, $arg) = @_;
 
@@ -338,8 +354,6 @@ sub _02pkg_front_matter {
 no Moose;
 1;
 
-
-
 =pod
 
 =head1 NAME
@@ -348,7 +362,7 @@ CPAN::Faker - build a bogus CPAN instance for testing
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -433,11 +447,13 @@ C<%entry> is expected to contain the following entries:
 
 =head2 write_perms_index
 
+=head2 write_perms_gz_index
+
 All these are automatically called by C<make_cpan>; you probably do not need to
 call them yourself.
 
 Write C<01mailrc.txt.gz>, C<02packages.details.txt.gz>, C<03modlist.data.gz>,
-and C<06perms.txt> respectively.
+C<06perms.txt>, and C<06perms.txt.gz> respectively.
 
 =head1 THE CPAN INTERFACE
 
@@ -458,7 +474,6 @@ Other files that are not currently created, but may be in the future are:
 
   ./indices/find-ls.gz
   ./indices/ls-lR.gz
-  ./modules/06perms.txt.gz
   ./modules/by-category/...
   ./modules/by-module/...
 
@@ -485,7 +500,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
 
 __DATA__
 __[packages]__
