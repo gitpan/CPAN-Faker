@@ -1,6 +1,6 @@
 package CPAN::Faker;
 {
-  $CPAN::Faker::VERSION = '0.008';
+  $CPAN::Faker::VERSION = '0.009';
 }
 use 5.008;
 use Moose;
@@ -70,7 +70,6 @@ sub make_cpan {
   for ($self->source) {
     Carp::croak "source directory does not exist"     unless -e;
     Carp::croak "source directory is not a directory" unless -d;
-    Carp::croak "source directory is not writeable"   unless -w;
   }
 
   for ($self->dest) {
@@ -362,7 +361,7 @@ CPAN::Faker - build a bogus CPAN instance for testing
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 

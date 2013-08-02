@@ -11,10 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "build a bogus CPAN instance for testing",
   "AUTHOR" => "Ricardo Signes <rjbs\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "File::Temp" => 0,
-    "Test::More" => "0.96"
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -25,29 +22,49 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "CPAN::Faker",
   "PREREQ_PM" => {
-    "CPAN::Checksums" => 0,
-    "Compress::Zlib" => 0,
-    "Cwd" => 0,
-    "Data::Section" => 0,
-    "File::Find" => 0,
-    "File::Next" => 0,
-    "File::Path" => 0,
-    "File::Spec" => 0,
-    "Getopt::Long::Descriptive" => 0,
-    "IO::Compress::Gzip" => 0,
+    "CPAN::Checksums" => "0",
+    "Compress::Zlib" => "0",
+    "Cwd" => "0",
+    "Data::Section" => "0",
+    "File::Find" => "0",
+    "File::Next" => "0",
+    "File::Path" => "0",
+    "File::Spec" => "0",
+    "Getopt::Long::Descriptive" => "0",
+    "IO::Compress::Gzip" => "0",
     "Module::Faker::Dist" => "0.008",
-    "Moose" => 0,
-    "Sort::Versions" => 0,
-    "Text::Template" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "Moose" => "0",
+    "Sort::Versions" => "0",
+    "Text::Template" => "0",
+    "strict" => "0",
+    "warnings" => "0"
   },
-  "VERSION" => "0.008",
+  "TEST_REQUIRES" => {
+    "Capture::Tiny" => "0",
+    "File::Temp" => "0",
+    "Test::More" => "0.96",
+    "Test::Script" => "1.05",
+    "blib" => "0"
+  },
+  "VERSION" => "0.009",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
