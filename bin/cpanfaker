@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 # PODNAME: cpanfaker
+# ABSTRACT: build a fake CPAN from a source directory
 
 use CPAN::Faker;
 use Getopt::Long::Descriptive;
@@ -27,13 +28,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-cpanfaker
+cpanfaker - build a fake CPAN from a source directory
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 AUTHOR
 

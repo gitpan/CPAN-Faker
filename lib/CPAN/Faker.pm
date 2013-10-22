@@ -1,6 +1,6 @@
 package CPAN::Faker;
 {
-  $CPAN::Faker::VERSION = '0.009';
+  $CPAN::Faker::VERSION = '0.010';
 }
 use 5.008;
 use Moose;
@@ -15,7 +15,7 @@ use File::Next ();
 use File::Path ();
 use File::Spec ();
 use IO::Compress::Gzip qw(gzip $GzipError);
-use Module::Faker::Dist 0.008; # from .dist files
+use Module::Faker::Dist 0.015; # ->packages
 use Sort::Versions qw(versioncmp);
 use Text::Template;
 
@@ -183,7 +183,7 @@ sub _maybe_index {
 
   my $index = $self->_pkg_index;
 
-  PACKAGE: for my $package ($dist->provides) {
+  PACKAGE: for my $package ($dist->packages) {
     if (my $e = $index->{ $package->name }) {
       if (defined $package->version and not defined $e->{version}) {
         $self->_index_pkg_obj($package, $dist);
@@ -355,13 +355,15 @@ no Moose;
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 CPAN::Faker - build a bogus CPAN instance for testing
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 SYNOPSIS
 
